@@ -35,3 +35,5 @@ Route::namespace('Sample') -> group(function () {
 // NOTE: sample\で指定する必要がある。（use文を追加すれば別だが・・・）
 //Route::get('/sample', 'Sample\SampleController@index');
 //Route::get('/sample/other', 'Sample\SampleController@other');
+
+Route::get('/hello/{person}', 'HelloController@index');
