@@ -26,3 +26,12 @@ Route::middleware([HelloMiddleware::class]) -> group(function () {
     Route::get('/hello', 'HelloController@index');
     Route::get('/hello/other', 'HelloController@other');
 });
+
+Route::namespace('Sample') -> group(function () {
+    Route::get('/sample', 'SampleController@index');
+    Route::get('/sample/other', 'SampleController@other');
+});
+// Route::namespaceを使わないとどうなる？？？ ↓↓↓
+// NOTE: sample\で指定する必要がある。（use文を追加すれば別だが・・・）
+//Route::get('/sample', 'Sample\SampleController@index');
+//Route::get('/sample/other', 'Sample\SampleController@other');
