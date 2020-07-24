@@ -24,5 +24,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+
+        // NOTE: 一時的に前ページで値を変更したいならここで（開発中など）(コントローラーが呼ばれる前に実行される)
+        config([
+            'sample.data' => ['こんにちは', 'どうも', 'さようなら']
+        ]);
     }
 }
