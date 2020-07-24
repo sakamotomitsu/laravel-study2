@@ -13,10 +13,20 @@ class HelloController extends Controller
 //        ];
 //        return view('hello.index', $data);
 //    }
-    public function index($person)
+//    public function index($person)
+//    {
+//        $data = [
+//            'msg' => $person
+//        ];
+//        return view('hello.index', $data);
+//    }
+    public function index()
     {
+        $sample_msg = config('sample.message');
+        $sample_data = config('sample.data');
         $data = [
-            'msg' => $person
+            'msg' => $sample_msg,
+            'data' => $sample_data
         ];
         return view('hello.index', $data);
     }
