@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class HelloController extends Controller
 {
+    function __construct()
+    {
+        config(['sample.message' => '新しいメッセージ！']);
+    }
+
 //    public function index(Request $request)
 //    {
 //        $data = [
