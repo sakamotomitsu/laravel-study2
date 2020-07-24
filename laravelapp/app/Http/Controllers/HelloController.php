@@ -8,6 +8,7 @@ class HelloController extends Controller
 {
     function __construct()
     {
+        // NOTE: このクラス内でしか効果を発揮しない
         config(['sample.message' => '新しいメッセージ！']);
     }
 
@@ -36,11 +37,15 @@ class HelloController extends Controller
         return view('hello.index', $data);
     }
 
+//    public function other(Request $request)
+//    {
+//        $data = [
+//            'msg' => $request -> bye
+//        ];
+//        return view('hello.index', $data);
+//    }
     public function other(Request $request)
     {
-        $data = [
-            'msg' => $request -> bye
-        ];
-        return view('hello.index', $data);
+        return redirect() -> route('sample');
     }
 }

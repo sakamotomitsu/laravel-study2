@@ -28,7 +28,7 @@ Route::middleware([HelloMiddleware::class]) -> group(function () {
 });
 
 Route::namespace('Sample') -> group(function () {
-    Route::get('/sample', 'SampleController@index');
+    Route::get('/sample', 'SampleController@index') -> name('sample');
     Route::get('/sample/other', 'SampleController@other');
 });
 // Route::namespaceを使わないとどうなる？？？ ↓↓↓
