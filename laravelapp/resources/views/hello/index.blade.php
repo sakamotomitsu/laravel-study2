@@ -6,10 +6,20 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Index</title>
+    <style>
+        th {
+            background-color: red;
+            padding: 10px;
+        }
+        td {
+            background-color: #eee;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>Hello/Index</h1>
-    <p>{{ $msg }}</p>
+    <p>{!! $msg !!}</p>
     <ul>
     @foreach($data as $item)
     <li>{{ $item }}</li>
