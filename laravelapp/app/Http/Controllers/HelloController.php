@@ -3,13 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HelloController extends Controller
 {
-    function __construct()
+    private $file_name;
+
+//    function __construct()
+//    {
+//        // NOTE: このクラス内でしか効果を発揮しない
+//        config(['sample.message' => '新しいメッセージ！']);
+//    }
+    public function __construct()
     {
-        // NOTE: このクラス内でしか効果を発揮しない
-        config(['sample.message' => '新しいメッセージ！']);
+        $this -> file_name = 'sample.txt';
     }
 
 //    public function index(Request $request)
@@ -36,13 +43,23 @@ class HelloController extends Controller
 //        ];
 //        return view('hello.index', $data);
 //    }
+//    public function index()
+//    {
+//        $sample_msg = env('SAMPLE_MESSAGE');
+//        $sample_data = env('SAMPLE_DATA');
+//        $data = [
+//            'msg' => $sample_msg,
+//            'data' => explode(',', $sample_data)
+//        ];
+//        return view('hello.index', $data);
+//    }
     public function index()
     {
-        $sample_msg = env('SAMPLE_MESSAGE');
-        $sample_data = env('SAMPLE_DATA');
+        $sample_msg = $this -> file_name;
+        $sample_data = Storage::get($this -> file_name);
         $data = [
             'msg' => $sample_msg,
-            'data' => explode(',', $sample_data)
+            'data' => explode(PHP_EOL, $sample_data)
         ];
         return view('hello.index', $data);
     }
@@ -56,8 +73,16 @@ class HelloController extends Controller
 //        ];
 //        return view('hello.index', $data);
 //    }
-    public function other(Request $request)
+//    public function other(Request $request)
+//    {
+//        return redirect() -> route('sample');
+//    }
+    public function other($msg)
     {
-        return redirect() -> route('sample');
+//        $data = Storage::get($this -> file_name) . PHP_EOL . $msg;
+//        Storage::put($this -> file_name, $data);
+        // ↓もっと簡単に
+        Storage::append($this -> file_name, $msg);
+        return redirect() -> route('hello');
     }
 }
