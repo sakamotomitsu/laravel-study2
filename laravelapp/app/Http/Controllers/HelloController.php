@@ -118,9 +118,30 @@ class HelloController extends Controller
 //        Storage::append($this -> file_name, $msg);
 //        return redirect() -> route('hello');
 //    }
+//    public function other($msg)
+//    {
+//        Storage::disk('public') -> prepend($this -> file_name, $msg);
+//        return redirect() -> route('hello');
+//    }
     public function other($msg)
     {
-        Storage::disk('public') -> prepend($this -> file_name, $msg);
+//        // copy moveは、元ファイルが無かったり、移動・コピー先にファイルが存在している場合、例外が発生する
+//        // その為、はじめにdelete処理を走らせている
+//        Storage::disk('public') -> delete('bk_' . $this -> file_name);
+//        Storage::disk('public') -> copy($this -> file_name, 'bk_' . $this -> file_name);
+//        Storage::disk('public') -> delete('bk_' . $this -> file_name);
+//        Storage::disk('public') -> move('public/bk_' .$this -> file_name, 'bk_' . $this -> file_name);
+
+        // ↓上のコードを元にexistsを使って存在するのか確認
+        if( Storage::disk('public') -> exists('bk_' . $this -> file_name) ) {
+            Storage::disk('public') -> delete('bk_' . $this -> file_name);
+        }
+        Storage::disk('public') -> copy($this -> file_name, 'bk_' . $this -> file_name);
+        if( Storage::disk('local') -> exists('bk_' . $this -> file_name) ) {
+            Storage::disk('local') -> delete('bk_' .$this -> file_name);
+        }
+        Storage::disk('local') -> move('public/bk_' . $this -> file_name, 'bk_' . $this -> file_name);
+
         return redirect() -> route('hello');
     }
 }
