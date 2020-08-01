@@ -26,16 +26,28 @@ class HelloController extends Controller
 //        ];
 //        return view('hello.index', $data);
 //    }
+//    public function index()
+//    {
+//        $sample_msg = config('sample.message');
+//        $sample_data = config('sample.data');
+//        $data = [
+//            'msg' => $sample_msg,
+//            'data' => $sample_data
+//        ];
+//        return view('hello.index', $data);
+//    }
     public function index()
     {
-        $sample_msg = config('sample.message');
-        $sample_data = config('sample.data');
+        $sample_msg = env('SAMPLE_MESSAGE');
+        $sample_data = env('SAMPLE_DATA');
         $data = [
             'msg' => $sample_msg,
-            'data' => $sample_data
+            'data' => explode(',', $sample_data)
         ];
         return view('hello.index', $data);
     }
+
+
 
 //    public function other(Request $request)
 //    {
