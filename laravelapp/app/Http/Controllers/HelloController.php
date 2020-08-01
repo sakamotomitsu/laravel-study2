@@ -16,7 +16,8 @@ class HelloController extends Controller
 //    }
     public function __construct()
     {
-        $this -> file_name = 'sample.txt';
+//        $this -> file_name = 'sample.txt';
+        $this -> file_name = 'hello.txt';
     }
 
 //    public function index(Request $request)
@@ -53,10 +54,20 @@ class HelloController extends Controller
 //        ];
 //        return view('hello.index', $data);
 //    }
+//    public function index()
+//    {
+//        $sample_msg = $this -> file_name;
+//        $sample_data = Storage::get($this -> file_name);
+//        $data = [
+//            'msg' => $sample_msg,
+//            'data' => explode(PHP_EOL, $sample_data)
+//        ];
+//        return view('hello.index', $data);
+//    }
     public function index()
     {
-        $sample_msg = $this -> file_name;
-        $sample_data = Storage::get($this -> file_name);
+        $sample_msg = Storage::disk('public') -> url($this -> file_name);
+        $sample_data = Storage::disk('public') -> get($this -> file_name);
         $data = [
             'msg' => $sample_msg,
             'data' => explode(PHP_EOL, $sample_data)
@@ -77,12 +88,17 @@ class HelloController extends Controller
 //    {
 //        return redirect() -> route('sample');
 //    }
+//    public function other($msg)
+//    {
+////        $data = Storage::get($this -> file_name) . PHP_EOL . $msg;
+////        Storage::put($this -> file_name, $data);
+//        // ↓もっと簡単に
+//        Storage::append($this -> file_name, $msg);
+//        return redirect() -> route('hello');
+//    }
     public function other($msg)
     {
-//        $data = Storage::get($this -> file_name) . PHP_EOL . $msg;
-//        Storage::put($this -> file_name, $data);
-        // ↓もっと簡単に
-        Storage::append($this -> file_name, $msg);
+        Storage::disk('public') -> prepend($this -> file_name, $msg);
         return redirect() -> route('hello');
     }
 }
