@@ -144,8 +144,14 @@ class HelloController extends Controller
 //
 //        return redirect() -> route('hello');
 //    }
-    public function other($msg)
+//    public function other($msg)
+//    {
+//        return Storage::disk('public')->download($this -> file_name);
+//    }
+    public function other(Request $request)
     {
-        return Storage::disk('public')->download($this -> file_name);
+        // putFileの第一引数は、/Storage/app/ をルートとします
+        Storage::disk('local')->putFile('files', $request->file('file'));
+        return redirect()->route('hello');
     }
 }
