@@ -74,25 +74,36 @@ class HelloController extends Controller
 //        ];
 //        return view('hello.index', $data);
 //    }
+//    public function index()
+//    {
+//        $url = Storage::disk('public') -> url($this -> file_name);
+//        $size = Storage::disk('public') -> size($this -> file_name);
+//        $modified = Storage::disk('public')
+//            -> lastModified($this ->file_name);
+//
+//        $modified_time = date('y-m-d H:i:s', $modified);
+//        $sample_keys = ['url', 'size', 'modified'];
+//        $sample_meta = [$url, $size, $modified_time];
+//
+//        $result = '<table><tr><th>' . implode('</th><th>', $sample_keys) . '</th></tr>';
+//        $result .= '<tr><td>' . implode('</td><td>', $sample_meta) . '</td></tr></table>';
+//
+//        $sample_data = Storage::disk('public') -> get($this -> file_name);
+//
+//        $data = [
+//            'msg' => $result,
+//            'data' => explode(PHP_EOL, $sample_data)
+//        ];
+//        return view('hello.index', $data);
+//    }
     public function index()
     {
-        $url = Storage::disk('public') -> url($this -> file_name);
-        $size = Storage::disk('public') -> size($this -> file_name);
-        $modified = Storage::disk('public')
-            -> lastModified($this ->file_name);
-
-        $modified_time = date('y-m-d H:i:s', $modified);
-        $sample_keys = ['url', 'size', 'modified'];
-        $sample_meta = [$url, $size, $modified_time];
-
-        $result = '<table><tr><th>' . implode('</th><th>', $sample_keys) . '</th></tr>';
-        $result .= '<tr><td>' . implode('</td><td>', $sample_meta) . '</td></tr></table>';
-
-        $sample_data = Storage::disk('public') -> get($this -> file_name);
+        $dir = '/';
+        $all = Storage::disk('local')->allFiles($dir);
 
         $data = [
-            'msg' => $result,
-            'data' => explode(PHP_EOL, $sample_data)
+            'msg' => 'DIR:'. $dir,
+            'data' => $all
         ];
         return view('hello.index', $data);
     }
