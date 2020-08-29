@@ -150,8 +150,9 @@ class HelloController extends Controller
 //    }
     public function other(Request $request)
     {
+        $ext = '.' . $request->file('file')->extension();
         // putFileの第一引数は、/Storage/app/ をルートとします
-        Storage::disk('local')->putFile('files', $request->file('file'));
+        Storage::disk('local')->putFileas('files', $request->file('file'), 'uploaded'.$ext);
         return redirect()->route('hello');
     }
 }
