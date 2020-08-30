@@ -18,32 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::get('/hello', 'HelloController@index') -> name('hello');
-//Route::get('/hello/other', 'HelloController@other');
-//Route::get('/hello/{id}', 'HelloController@index') -> where('id', '[0-9]+');
 
-//Route::middleware([HelloMiddleware::class]) -> group(function () {
-//    Route::get('/hello', 'HelloController@index');
-//    Route::get('/hello/other', 'HelloController@other');
-//});
-
-Route::namespace('Sample') -> group(function () {
-    Route::get('/sample', 'SampleController@index') -> name('sample');
-    Route::get('/sample/other', 'SampleController@other');
-});
-// Route::namespaceを使わないとどうなる？？？ ↓↓↓
-// NOTE: sample\で指定する必要がある。（use文を追加すれば別だが・・・）
-//Route::get('/sample', 'Sample\SampleController@index');
-//Route::get('/sample/other', 'Sample\SampleController@other');
-
-//Route::get('/hello/{person}', 'HelloController@index');
-
-
-//Route::get('/hello', 'HelloController@index');
-//Route::post('/hello', 'HelloController@index');
-//Route::get('hello/{msg}', 'HelloController@other');
-
-//Route::post('/hello/other', 'HelloController@other');
-
-Route::get('/hello/other', 'HelloController@other');
 Route::get('/hello', 'HelloController@index') -> name('hello');
