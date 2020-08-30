@@ -24,12 +24,18 @@ class HelloController extends Controller
     public function index(Request $request)
     {
         $msg = 'Please input text';
+        $keys = [];
+        $values = [];
         if( $request -> isMethod('post') )
         {
-            $msg = 'yout typed: "' . $request -> input('msg') . '"';
+            $form = $request -> all();
+            $keys = array_keys($form);
+            $values = array_values($form);
         }
         $data = [
-            'msg' => $msg
+            'msg' => $msg,
+            'keys' => $keys,
+            'values' => $values
         ];
         return view('hello.index', $data);
     }
