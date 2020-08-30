@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 
 class HelloController extends Controller
@@ -20,95 +21,18 @@ class HelloController extends Controller
         $this -> file_name = 'hello.txt';
     }
 
-//    public function index(Request $request)
-//    {
-//        $data = [
-//            'msg' => $request -> hello
-//        ];
-//        return view('hello.index', $data);
-//    }
-//    public function index($person)
-//    {
-//        $data = [
-//            'msg' => $person
-//        ];
-//        return view('hello.index', $data);
-//    }
-//    public function index()
-//    {
-//        $sample_msg = config('sample.message');
-//        $sample_data = config('sample.data');
-//        $data = [
-//            'msg' => $sample_msg,
-//            'data' => $sample_data
-//        ];
-//        return view('hello.index', $data);
-//    }
-//    public function index()
-//    {
-//        $sample_msg = env('SAMPLE_MESSAGE');
-//        $sample_data = env('SAMPLE_DATA');
-//        $data = [
-//            'msg' => $sample_msg,
-//            'data' => explode(',', $sample_data)
-//        ];
-//        return view('hello.index', $data);
-//    }
-//    public function index()
-//    {
-//        $sample_msg = $this -> file_name;
-//        $sample_data = Storage::get($this -> file_name);
-//        $data = [
-//            'msg' => $sample_msg,
-//            'data' => explode(PHP_EOL, $sample_data)
-//        ];
-//        return view('hello.index', $data);
-//    }
-//    public function index()
-//    {
-//        $sample_msg = Storage::disk('public') -> url($this -> file_name);
-//        $sample_data = Storage::disk('public') -> get($this -> file_name);
-//        $data = [
-//            'msg' => $sample_msg,
-//            'data' => explode(PHP_EOL, $sample_data)
-//        ];
-//        return view('hello.index', $data);
-//    }
-//    public function index()
-//    {
-//        $url = Storage::disk('public') -> url($this -> file_name);
-//        $size = Storage::disk('public') -> size($this -> file_name);
-//        $modified = Storage::disk('public')
-//            -> lastModified($this ->file_name);
-//
-//        $modified_time = date('y-m-d H:i:s', $modified);
-//        $sample_keys = ['url', 'size', 'modified'];
-//        $sample_meta = [$url, $size, $modified_time];
-//
-//        $result = '<table><tr><th>' . implode('</th><th>', $sample_keys) . '</th></tr>';
-//        $result .= '<tr><td>' . implode('</td><td>', $sample_meta) . '</td></tr></table>';
-//
-//        $sample_data = Storage::disk('public') -> get($this -> file_name);
-//
-//        $data = [
-//            'msg' => $result,
-//            'data' => explode(PHP_EOL, $sample_data)
-//        ];
-//        return view('hello.index', $data);
-//    }
-    public function index()
+    public function index(Request $request)
     {
-        $dir = '/';
-//        $all = Storage::disk('local')->allFiles($dir);
-        $all = Storage::disk('logs')->allFiles($dir);
-
+        $msg = 'Please input text';
+        if( $request -> isMethod('post') )
+        {
+            $msg = 'yout typed: "' . $request -> input('msg') . '"';
+        }
         $data = [
-            'msg' => 'DIR:'. $dir,
-            'data' => $all
+            'msg' => $msg
         ];
         return view('hello.index', $data);
     }
-
 
 
 //    public function other(Request $request)
