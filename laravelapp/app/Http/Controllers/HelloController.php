@@ -26,8 +26,8 @@ class HelloController extends Controller
         $name = $request -> query('name');
         $mail = $request -> query('mail');
         $tel = $request -> query('tel');
+        $msg = $request -> query('msg');
 
-        $msg = $name . ',' . $mail . ',' . $tel;
         $keys = ['名前', 'メール', '電話'];
         $values = [$name, $mail, $tel];
         $data = [
@@ -39,61 +39,16 @@ class HelloController extends Controller
         return view('hello.index', $data);
     }
 
-
-//    public function other(Request $request)
-//    {
-//        $data = [
-//            'msg' => $request -> bye
-//        ];
-//        return view('hello.index', $data);
-//    }
-//    public function other(Request $request)
-//    {
-//        return redirect() -> route('sample');
-//    }
-//    public function other($msg)
-//    {
-////        $data = Storage::get($this -> file_name) . PHP_EOL . $msg;
-////        Storage::put($this -> file_name, $data);
-//        // ↓もっと簡単に
-//        Storage::append($this -> file_name, $msg);
-//        return redirect() -> route('hello');
-//    }
-//    public function other($msg)
-//    {
-//        Storage::disk('public') -> prepend($this -> file_name, $msg);
-//        return redirect() -> route('hello');
-//    }
-//    public function other($msg)
-//    {
-////        // copy moveは、元ファイルが無かったり、移動・コピー先にファイルが存在している場合、例外が発生する
-////        // その為、はじめにdelete処理を走らせている
-////        Storage::disk('public') -> delete('bk_' . $this -> file_name);
-////        Storage::disk('public') -> copy($this -> file_name, 'bk_' . $this -> file_name);
-////        Storage::disk('public') -> delete('bk_' . $this -> file_name);
-////        Storage::disk('public') -> move('public/bk_' .$this -> file_name, 'bk_' . $this -> file_name);
-//
-//        // ↓上のコードを元にexistsを使って存在するのか確認
-//        if( Storage::disk('public') -> exists('bk_' . $this -> file_name) ) {
-//            Storage::disk('public') -> delete('bk_' . $this -> file_name);
-//        }
-//        Storage::disk('public') -> copy($this -> file_name, 'bk_' . $this -> file_name);
-//        if( Storage::disk('local') -> exists('bk_' . $this -> file_name) ) {
-//            Storage::disk('local') -> delete('bk_' .$this -> file_name);
-//        }
-//        Storage::disk('local') -> move('public/bk_' . $this -> file_name, 'bk_' . $this -> file_name);
-//
-//        return redirect() -> route('hello');
-//    }
-//    public function other($msg)
-//    {
-//        return Storage::disk('public')->download($this -> file_name);
-//    }
-    public function other(Request $request)
+    public function other()
     {
-        $ext = '.' . $request->file('file')->extension();
-        // putFileの第一引数は、/Storage/app/ をルートとします
-        Storage::disk('local')->putFileas('files', $request->file('file'), 'uploaded'.$ext);
-        return redirect()->route('hello');
+        $data = [
+            'name' => 'Taro',
+            'mail' => 'taro@example.com',
+            'tel' => '111-2222-3333'
+        ];
+
+        $query_str = http_build_query($data);
+        $data['msg'] = $query_str;
+        return redirect() -> route('hello', $data);
     }
 }

@@ -39,8 +39,11 @@ Route::namespace('Sample') -> group(function () {
 //Route::get('/hello/{person}', 'HelloController@index');
 
 
-Route::get('/hello', 'HelloController@index');
-Route::post('/hello', 'HelloController@index');
+//Route::get('/hello', 'HelloController@index');
+//Route::post('/hello', 'HelloController@index');
 //Route::get('hello/{msg}', 'HelloController@other');
 
-Route::post('/hello/other', 'HelloController@other');
+//Route::post('/hello/other', 'HelloController@other');
+
+Route::get('/hello/other', 'HelloController@other');
+Route::get('/hello', 'HelloController@index') -> name('hello');
