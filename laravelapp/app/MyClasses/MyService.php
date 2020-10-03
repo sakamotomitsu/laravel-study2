@@ -10,8 +10,10 @@ class MyService
 
     public function __construct (int $id = -1)
     {
-        $this->id = $id;
-        $this->msg = 'select:' . $this->data[$id];
+        if($id >= 0) {
+            $this->id = $id;
+            $this->msg = 'select:' . $this->data[$id];
+        }
     }
 
     public function say()
