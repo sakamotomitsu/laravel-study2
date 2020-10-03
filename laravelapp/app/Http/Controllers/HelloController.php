@@ -22,11 +22,17 @@ class HelloController extends Controller
         $this -> file_name = 'hello.txt';
     }
 
-    public function index(MyService $myService)
+    public function index()
     {
+        // NOTE: 引数ではなく、app関数でインスタンスを取得する
+        /* 下記の書き方でもOK
+         * $myservice = app()->make('App\MyClasses\MyService');
+         * $myservice = resolve('App\MyClasses\MyService');
+         * */
+        $myservice = app('App\MyClasses\MyService');
         $data = [
-            'msg' => $myService->say(),
-            'data' => $myService->data()
+            'msg' => $myservice->say(),
+            'data' => $myservice->data()
         ];
         return view('hello.index', $data);
     }
