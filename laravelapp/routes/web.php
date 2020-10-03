@@ -19,4 +19,4 @@ Route::get('/', function () {
 });
 
 
-Route::get('/hello/{id}', 'HelloController@index') -> name('hello');
+Route::get('/hello', 'HelloController@index') -> name('hello');

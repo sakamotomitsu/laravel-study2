@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Storage;
+//use Illuminate\Http\Request;
+//use Illuminate\Http\Response;
+//use Illuminate\Support\Facades\Storage;
+//use App\MyClasses\MyService;
+
 use App\MyClasses\MyService;
 
 class HelloController extends Controller
@@ -22,9 +24,9 @@ class HelloController extends Controller
         $this -> file_name = 'hello.txt';
     }
 
-    public function index(int $id = -1)
+    public function index(MyService $myservice, int $id = -1)
     {
-        $myservice = app()->makeWith('App\MyClasses\MyService',['id' => $id]);
+        $myservice->setId($id);
         $data = [
             'msg' => $myservice->say($id),
             'data' => $myservice->alldata()
