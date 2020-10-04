@@ -11,17 +11,9 @@ use App\MyClasses\MyService;
 
 class HelloController extends Controller
 {
-    private $file_name;
-
-//    function __construct()
-//    {
-//        // NOTE: このクラス内でしか効果を発揮しない
-//        config(['sample.message' => '新しいメッセージ！']);
-//    }
-    public function __construct()
+    function __construct(MyService $myservice)
     {
-//        $this -> file_name = 'sample.txt';
-        $this -> file_name = 'hello.txt';
+        $myservice = app('App\MyClasses\MyService');
     }
 
     public function index(MyService $myservice, int $id = -1)
