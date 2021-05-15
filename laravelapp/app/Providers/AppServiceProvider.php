@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\MyClasses\MyService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,13 +25,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
 
-        // NOTE: 一時的に前ページで値を変更したいならここで（開発中など）(コントローラーが呼ばれる前に実行される)
-        config([
-            'sample.data' => ['こんにちは', 'どうも', 'さようなら']
-        ]);
-
-        app()->when('App\MyClasses\MyService')
-             ->needs('$id')
-             ->give(1);
+        app()->bind('App\MyClasses\MyServiceInterface',
+            'App\MyClasses\MyService');
     }
 }
